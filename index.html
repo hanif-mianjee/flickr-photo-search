@@ -1,0 +1,149 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flicker Photo Search</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+      </script>
+
+</head>
+
+<body>
+    <div id="app" class="container">
+
+        <div class="jumbotron my-5">
+            <h1 class="text-center">Flicker Photo Search</h1>
+        </div>
+
+        <search-form v-on:typing="searchPhotos"></search-form>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mb-5">
+            <div class="col" v-for="item in items" :key="item.date_taken">
+                <feed-card :feed="item" ></feed-card>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { createApp } from 'vue'
+
+        // Create main vue app
+        const app = createApp({
+            data() {
+                return {
+                    items: [ // Sample Data
+                        {
+                            "title": "21 - De tout-10",
+                            "link": "https:\/\/www.flickr.com\/photos\/189005633@N05\/52163059406\/",
+                            "media": {"m":"https:\/\/live.staticflickr.com\/65535\/52163059406_69f5e7a0ce_m.jpg"},
+                            "date_taken": "2021-12-01T19:59:42-08:00",
+                            "description": " <p><a href=\"https:\/\/www.flickr.com\/people\/189005633@N05\/\">Mat\u00e9 Oz<\/a> posted a photo:<\/p> <p><a href=\"https:\/\/www.flickr.com\/photos\/189005633@N05\/52163059406\/\" title=\"21 - De tout-10\"><img src=\"https:\/\/live.staticflickr.com\/65535\/52163059406_69f5e7a0ce_m.jpg\" width=\"240\" height=\"160\" alt=\"21 - De tout-10\" \/><\/a><\/p> <p>Export format web (sans signature) + insta bord blanc<\/p>",
+                            "published": "2022-06-21T15:43:45Z",
+                            "author": "nobody@flickr.com (\"Mat\u00e9 Oz\")",
+                            "author_id": "189005633@N05",
+                            "tags": "vert animals cat dog photography belgium animalslover"
+                        },
+                        {
+                            "title": "21 - De tout",
+                            "link": "https:\/\/www.flickr.com\/photos\/189005633@N05\/52163548965\/",
+                            "media": {"m":"https:\/\/live.staticflickr.com\/65535\/52163548965_f6146a71af_m.jpg"},
+                            "date_taken": "2021-02-18T11:28:31-08:00",
+                            "description": " <p><a href=\"https:\/\/www.flickr.com\/people\/189005633@N05\/\">Mat\u00e9 Oz<\/a> posted a photo:<\/p> <p><a href=\"https:\/\/www.flickr.com\/photos\/189005633@N05\/52163548965\/\" title=\"21 - De tout\"><img src=\"https:\/\/live.staticflickr.com\/65535\/52163548965_f6146a71af_m.jpg\" width=\"240\" height=\"160\" alt=\"21 - De tout\" \/><\/a><\/p> <p>Export format web (sans signature) + insta bord blanc<\/p>",
+                            "published": "2022-06-21T15:43:46Z",
+                            "author": "nobody@flickr.com (\"Mat\u00e9 Oz\")",
+                            "author_id": "189005633@N05",
+                            "tags": "vert animals cat dog photography belgium animalslover"
+                        },
+                        {
+                            "title": "Great Crested Grebe",
+                            "link": "https:\/\/www.flickr.com\/photos\/karen_roe\/52162266497\/",
+                            "media": {"m":"https:\/\/live.staticflickr.com\/65535\/52162266497_7494306517_m.jpg"},
+                            "date_taken": "2022-04-15T10:43:10-08:00",
+                            "description": " <p><a href=\"https:\/\/www.flickr.com\/people\/karen_roe\/\">Karen Roe<\/a> posted a photo:<\/p> <p><a href=\"https:\/\/www.flickr.com\/photos\/karen_roe\/52162266497\/\" title=\"Great Crested Grebe\"><img src=\"https:\/\/live.staticflickr.com\/65535\/52162266497_7494306517_m.jpg\" width=\"240\" height=\"171\" alt=\"Great Crested Grebe\" \/><\/a><\/p> <p>Canon EOS 7D MkII<br \/> EF100-400mm f\/4.5-5.6L IS II USM<br \/> Zoom Telephoto<\/p>",
+                            "published": "2022-06-21T17:38:49Z",
+                            "author": "nobody@flickr.com (\"Karen Roe\")",
+                            "author_id": "28752865@N08",
+                            "tags": "unitedkingdom outside outdoor photo photography"
+                        },
+                        {
+                            "title": "Forget-me-not",
+                            "link": "https:\/\/www.flickr.com\/photos\/153190740@N02\/52163314908\/",
+                            "media": {"m":"https:\/\/live.staticflickr.com\/65535\/52163314908_fd48690ae5_m.jpg"},
+                            "date_taken": "2022-05-09T16:12:07-08:00",
+                            "description": " <p><a href=\"https:\/\/www.flickr.com\/people\/153190740@N02\/\">lukpecyn<\/a> posted a photo:<\/p> <p><a href=\"https:\/\/www.flickr.com\/photos\/153190740@N02\/52163314908\/\" title=\"Forget-me-not\"><img src=\"https:\/\/live.staticflickr.com\/65535\/52163314908_fd48690ae5_m.jpg\" width=\"240\" height=\"160\" alt=\"Forget-me-not\" \/><\/a><\/p> <p><\/p>",
+                            "published": "2022-06-21T17:37:51Z",
+                            "author": "nobody@flickr.com (\"lukpecyn\")",
+                            "author_id": "153190740@N02",
+                            "tags": "forgetmenot blueflower blueflowers flower flowers"
+                        },
+                    ]
+                }
+            },
+
+            methods: {
+                async searchPhotos(keyword) {
+                    
+                    /**
+                     * TODO:: Implement API here
+                     **/
+
+                }
+            }
+        });
+
+        // Search bar component
+        // Component register style 1
+        app.component("search-form", {
+            data() {
+                return {
+                    keyword: ""
+                }
+            },
+            watch: {
+                keyword(newValue) {
+                    this.$emit('typing', newValue);
+                }
+            },
+            template: `
+                <div class="mb-3">
+                    <input type="text" class="form-control form-control-lg" v-model="keyword" placeholder="Flowers">
+                </div>    
+            `
+        });
+
+        // Single feed item component
+        const FeedCard = {
+            props: ['feed'],
+            template: `
+                <div class="card">
+                    <img :src="feed.media.m" class="card-img-top" :alt="feed.title">
+                    <div class="card-body">
+                        <h5 class="card-title">{{feed.author}}</h5>
+                        <p class="card-text">TAGS: {{feed.tags}}</p>
+                        <a :href="feed.link" class="btn btn-primary" target="_blank">View Feed &nearr;</a>
+                    </div>
+                </div>   
+            `
+        };
+        // Component register style 2
+        app.component("feed-card", FeedCard);
+
+        // Mounting main vue app after registering all components
+        app.mount('#app');
+
+    </script>
+</body>
+
+</html>
